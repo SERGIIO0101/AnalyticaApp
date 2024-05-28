@@ -8,7 +8,9 @@
 body {
     background-color: aliceblue;
     font-family: 'Spoof', sans-serif; /* Usamos la fuente Spoof como la fuente principal */
+    color: #333333; /* Gris oscuro */
 }
+
 @font-face {
     font-family: 'Spoof'; /* Nombre que usarás para referirte a la fuente */
     src: url('Spoof-Thin.woff2') format('woff2'), /* Ruta al archivo de la fuente */
@@ -111,11 +113,7 @@ footer p {
     border-radius: 10px;
 }
 
-section {
-    margin-bottom: 40px;
-}
-
-/* Estilos para Blog */
+/* Blog Post */
 .blog-post {
     margin-bottom: 40px;
 }
@@ -130,7 +128,7 @@ section {
     margin-bottom: 10px;
 }
 
-/* Estilos para Developer */
+/* Developer Profile */
 .developer-profile {
     display: flex;
     align-items: center;
@@ -158,7 +156,7 @@ section {
     font-size: 16px;
 }
 
-/* Estilos para Contact Us */
+/* Contact Us */
 form label {
     display: block;
     margin-bottom: 10px;
@@ -201,7 +199,7 @@ section ul li {
     font-size: 16px;
 }
 
-/* Estilos para System Status */
+/* System Status */
 .status {
     font-weight: bold;
     color: green; /* Cambia el color según el estado del sistema */
@@ -220,36 +218,8 @@ ul {
 ul li {
     margin-bottom: 5px; /* Espaciado entre elementos de la lista */
 }
-/* Reset de márgenes y padding */
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
 
-/* Estilo del cuerpo */
-body {
-    background-color: #F0F8FF; /* Alice Blue */
-    font-family: 'Arial', sans-serif;
-    color: #333333; /* Gris oscuro */
-}
-
-/* Contenido principal para la página de desarrolladores */
-/* Reset de márgenes y padding */
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
-/* Estilo del cuerpo */
-body {
-    background-color: #F0F8FF; /* Alice Blue */
-    font-family: 'Arial', sans-serif;
-    color: #333333; /* Gris oscuro */
-}
-
-/* Contenido principal para la página de desarrolladores */
+/* Página de Desarrolladores */
 .dev-main-content {
     max-width: 1000px;
     margin: 50px auto;
@@ -268,7 +238,6 @@ body {
     text-align: center;
 }
 
-/* Estilo de las columnas para la página de desarrolladores */
 .dev-row {
     display: flex;
     flex-wrap: wrap;

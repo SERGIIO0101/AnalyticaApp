@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Olvidé la Contraseña</title>
+    <link rel="stylesheet" href="Style/StyleP.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <header>
+        <div class="logo-title">
+            <div class="logo">
+                <a href="../index.html"><img src="Style/content.png" alt="Logo"></a>
+            </div>
+            <div class="title">
+                <h1>AnalytiC</h1>
+            </div>
+        </div>
+    </header>
+    
+    <main class="container">
+        <div class="reset-password-container">
+            <form class="reset-password-form">
+                <h2 class="reset-password-title">Olvidé mi contraseña</h2>
+                <div class="reset-password-inputs">
+                    <input type="email" class="reset-password-box" placeholder="Ingresa tu correo electrónico" required>
+                </div>
+                <button type="submit" class="reset-password-submit">Enviar enlace de recuperación</button>
+                <div class="reset-password-links">
+                    <a href="LogIn.html">Volver a iniciar sesión</a>
+                </div>
+                <p class="reset-password-info">Te enviaremos un enlace para restablecer tu contraseña.</p>
+            </form>
+        </div>
+        
+    </main>
+<script>
+    document.getElementById('forgot-password-form').addEventListener('submit', function(event) {
+        event.preventDefault();
+        
+        const email = document.getElementById('email').value;
+        
+        if (validateEmail(email)) {
+            // Aquí puedes enviar el formulario al servidor
+            alert('Se ha enviado un enlace para restablecer su contraseña a su correo electrónico.');
+        } else {
+            alert('Por favor, ingrese un correo electrónico válido.');
+        }
+    });
+
+    function validateEmail(email) {
+        const re = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+        return re.test(email);
+    }
+</script>
+    <footer>
+        <div class="left">
+            <a href="../Footer/system-status.html">System Status</a> |
+            <a href="../Footer/Blog.html">Blog</a> |
+            <a href="../Footer/Developer.html">Developer</a> |
+            <a href="../Footer/Contact_us.html">Contact Us</a> |
+            <a href="../Footer/Help.html">Help</a>
+        </div>
+        <div class="right">
+            <div>
+                <a href="https://github.com/tuusuario" target="_blank"><i class="fab fa-github"></i></a>
+                <a href="https://www.facebook.com/tupagina" target="_blank"><i class="fab fa-facebook"></i></a>
+            </div>
+            <p>© 2024 ANALITYC SOFTWARE, LLC, A</p>
+        </div>
+    </footer>
+</body>
+</html>

@@ -1,0 +1,270 @@
+/* Estilos generales */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: aliceblue;
+    font-family: 'Spoof', sans-serif; /* Usamos la fuente Spoof como la fuente principal */
+}
+@font-face {
+    font-family: 'Spoof'; /* Nombre que usarás para referirte a la fuente */
+    src: url('Spoof-Thin.woff2') format('woff2'), /* Ruta al archivo de la fuente */
+         url('Spoof-Thin.woff') format('woff'); /* También puedes proporcionar diferentes formatos de fuente */
+}
+/* Header */
+header {
+    background-color: #fff;
+    color: #475C80;
+    padding: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #ddd;
+}
+
+header .logo-title {
+    display: flex;
+    align-items: center;
+}
+
+header .logo img {
+    width: 50px;
+}
+
+header .title h1 {
+    margin-left: 15px;
+    font-size: 24px;
+}
+
+header nav ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+header nav ul li {
+    display: inline;
+    margin-right: 20px;
+}
+
+header nav ul li a {
+    color: #475C80;
+    text-decoration: none;
+    font-size: 16px;
+}
+
+header nav ul li a:hover {
+    text-decoration: underline;
+}
+
+/* Estilos para el logo en el encabezado */
+.logo {
+    margin-right: 10px; /* Margen derecho para separar del título */
+}
+
+.logo img {
+    width: 50px; /* Tamaño del logo */
+    height: auto; /* Altura automática para mantener la proporción */
+}
+
+/* Estilos para el título en el encabezado */
+.title {
+    font-size: 24px; /* Tamaño del texto */
+    font-weight: bold; /* Negrita */
+}
+
+/* Footer */
+footer {
+    background-color: #1B1B1B;
+    color: #fff;
+    padding: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+}
+
+footer .left,
+footer .right {
+    display: flex;
+    align-items: center;
+}
+
+footer .left a,
+footer .right a {
+    color: #fff;
+    text-decoration: none;
+    margin: 0 10px;
+}
+
+footer .right a {
+    font-size: 24px;
+    margin-bottom: 5px;
+}
+
+footer .left a:hover,
+footer .right a:hover {
+    text-decoration: underline;
+}
+
+footer p {
+    margin: 0;
+}
+
+/* Contenedor principal */
+.reset-password-container {
+    display: flex;
+    justify-content: center; /* Centrar horizontalmente */
+    align-items: center; /* Centrar verticalmente */
+    height: 100vh; /* Para ocupar toda la altura de la ventana */
+    background-color: aliceblue; /* Fondo acorde al tema general */
+}
+
+/* Formulario */
+.reset-password-form {
+    text-align: center; /* Centrar el texto */
+    max-width: 500px; /* Ancho máximo del formulario */
+    width: 100%; /* Ancho completo */
+    padding: 20px; /* Espacio interno */
+    box-sizing: border-box; /* Incluir el padding en el ancho total */
+    background-color: #fff; /* Fondo blanco */
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1); /* Sombra para darle profundidad */
+    border-radius: 10px; /* Bordes redondeados */
+}
+
+/* Título del formulario */
+.reset-password-title {
+    color: #475C80; /* Color del texto */
+    font-size: 30px; /* Tamaño del texto */
+    margin-bottom: 25px; /* Espacio inferior */
+}
+
+/* Contenedor de campos de entrada */
+.reset-password-inputs {
+    margin-bottom: 20px; /* Espacio inferior */
+}
+
+/* Campos de entrada */
+.reset-password-box {
+    outline: none;
+    border: 1px solid #475C80; /* Borde con color específico */
+    padding: 15px 35px;
+    margin-bottom: 20px;
+    background-color: #f9f9f9; /* Fondo claro */
+    width: 100%; /* Ocupar todo el ancho disponible */
+    box-sizing: border-box; /* Incluir padding en el ancho total */
+    border-radius: 5px; /* Bordes redondeados */
+}
+
+/* Botón de envío */
+.reset-password-submit {
+    background-color: #475C80; /* Color de fondo */
+    padding: 15px;
+    color: #fff; /* Color del texto */
+    font-size: 14px; /* Tamaño del texto */
+    text-transform: uppercase; /* Texto en mayúsculas */
+    border: none; /* Sin borde */
+    border-radius: 15px; /* Bordes redondeados */
+    width: 100%; /* Ancho completo */
+    cursor: pointer; /* Cursor de mano */
+    transition: background-color 0.3s; /* Transición suave */
+}
+
+.reset-password-submit:hover {
+    background-color: #374a6e; /* Color de fondo al pasar el ratón */
+}
+
+/* Enlaces para iniciar sesión */
+.reset-password-links {
+    margin-top: 20px; /* Espacio superior */
+}
+
+/* Enlace dentro del formulario */
+.reset-password-links a {
+    color: #475C80; /* Color del texto */
+    text-decoration: none; /* Sin subrayado */
+    font-size: 15px; /* Tamaño del texto */
+}
+
+.reset-password-links a:hover {
+    text-decoration: underline; /* Subrayado al pasar el ratón */
+}
+
+/* Texto adicional sobre contraseñas */
+.reset-password-info {
+    font-size: 12px; /* Tamaño del texto */
+    color: #888; /* Color del texto */
+}
+/* Contenedor principal */
+.reset-container {
+    display: flex;
+    justify-content: center; /* Centrar horizontalmente */
+    align-items: center; /* Centrar verticalmente */
+    height: 100vh; /* Para ocupar toda la altura de la ventana */
+    background-color: aliceblue; /* Fondo acorde al tema general */
+}
+
+/* Formulario */
+.reset-form {
+    text-align: center; /* Centrar el texto */
+    max-width: 500px; /* Ancho máximo del formulario */
+    width: 100%; /* Ancho completo */
+    padding: 20px; /* Espacio interno */
+    box-sizing: border-box; /* Incluir el padding en el ancho total */
+    background-color: #fff; /* Fondo blanco */
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1); /* Sombra para darle profundidad */
+    border-radius: 10px; /* Bordes redondeados */
+}
+
+/* Título del formulario */
+.reset-title {
+    color: #475C80; /* Color del texto */
+    font-size: 30px; /* Tamaño del texto */
+    margin-bottom: 25px; /* Espacio inferior */
+}
+
+/* Contenedor de campos de entrada */
+.reset-inputs {
+    margin-bottom: 20px; /* Espacio inferior */
+}
+
+/* Campos de entrada */
+.reset-box {
+    outline: none;
+    border: 1px solid #475C80; /* Borde con color específico */
+    padding: 15px 35px;
+    margin-bottom: 20px;
+    background-color: #f9f9f9; /* Fondo claro */
+    width: 100%; /* Ocupar todo el ancho disponible */
+    box-sizing: border-box; /* Incluir padding en el ancho total */
+    border-radius: 5px; /* Bordes redondeados */
+}
+
+/* Botón de envío */
+.reset-submit {
+    background-color: #475C80; /* Color de fondo */
+    padding: 15px;
+    color: #fff; /* Color del texto */
+    font-size: 14px; /* Tamaño del texto */
+    text-transform: uppercase; /* Texto en mayúsculas */
+    border: none; /* Sin borde */
+    border-radius: 15px; /* Bordes redondeados */
+    width: 100%; /* Ancho completo */
+    cursor: pointer; /* Cursor de mano */
+    transition: background-color 0.3s; /* Transición suave */
+}
+
+.reset-submit:hover {
+    background-color: #374a6e; /* Color de fondo al pasar el ratón */
+}
+
+/* Texto adicional */
+.reset-info {
+    font-size: 12px; /* Tamaño del texto */
+    color: #888; /* Color del texto */
+}

@@ -22,7 +22,6 @@ header {
     background-color: #fff;
     color: #475C80;
     padding: 20px;
-    height: 80px;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -88,7 +87,7 @@ footer {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    /*position: fixed;*/
+    position: fixed;
     bottom: 0;
     width: 100%;
 }
@@ -119,15 +118,16 @@ footer .right a:hover {
 footer p {
     margin: 0;
 }
+
 /* Container */
 .container {
     display: flex;
-    height: 550px;
+    height: 700px;
     width: 1000px;
     box-shadow: 0 0 20px rgba(0, 0, 0, 4);
     margin: auto;
-    margin-top: 20px;
-    margin-bottom: 14px;
+    margin-top: 150px;
+    margin-bottom: 150px;
 }
 
 /* Información */
@@ -270,77 +270,3 @@ label[for="remember-me"] {
     }
 }
 
-/* Estilos para el contenedor principal */
-.new-container {
-    display: flex;
-    justify-content: center; /* Centrar horizontalmente */
-    align-items: center; /* Centrar verticalmente
-height: 100vh; /* Para ocupar toda la altura de la ventana */
-}
-
-/* Estilos del formulario */
-.new-form {
-    text-align: center; /* Centrar el texto */
-    max-width: 500px; /* Ancho máximo del formulario */
-    width: 100%; /* Ancho completo */
-    padding: 20px; /* Espacio interno */
-    box-sizing: border-box; /* Incluir el padding en el ancho total */
-    background-color: #fff;
-}
-
-/* Estilos del título del formulario */
-.new-form-title {
-    color: #475C80;
-    font-size: 30px;
-    margin-bottom: 25px;
-    margin-right: 100px;/* Añadir espacio inferior */
-}
-
-/* Estilos del contenedor de los campos de entrada */
-.new-inputs {
-    margin-bottom: 20px; /* Añadir espacio inferior */
-}
-
-/* Estilos de los campos de entrada */
-.new-box {
-    outline: none;
-    border-color: #475C80;
-    border-width: 0px 0px 0px 0px;
-    border-style: solid;
-    padding: 15px 35px;
-    margin-bottom: 20px;
-    background-color: #f9f9f9;
-    width: 100%; /* Ocupar todo el ancho disponible */
-    box-sizing: border-box; /* Incluir padding en el ancho total */
-}
-
-/* Estilos del botón de envío */
-.new-submit {
-    background-color: #fff;
-    padding: 15px;
-    bottom: 20;
-    color: #475C80;
-    font-size: 10px;
-    text-transform: uppercase;
-    border-radius: 15px;
-    width: 50%;
-    margin-top: 15px;
-}
-
-/* Estilos del enlace para iniciar sesión */
-.new-links {
-    margin-top: 20px; /* Añadir espacio superior */
-}
-
-/* Estilos para el enlace dentro del formulario */
-.new-links a {
-    color: #475C80;
-    text-decoration: none;
-    font-size: 15px;
-}
-
-/* Estilos para el texto adicional sobre las contraseñas */
-.password-info {
-    font-size: 12px;
-    color: #888;
-}

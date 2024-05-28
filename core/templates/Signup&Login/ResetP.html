@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Olvidé la Contraseña</title>
+    <link rel="stylesheet" href="Style/StyleP.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <header>
+        <div class="logo-title">
+            <div class="logo">
+                <a href="../index.html"><img src="Style/content.png" alt="Logo"></a>
+            </div>
+            <div class="title">
+                <h1>AnalytiC</h1>
+            </div>
+        </div>
+    </header>
+    
+    <main class="container">
+        <div class="reset-container">
+            <form class="reset-form">
+                <h2 class="reset-title">Restablecer contraseña</h2>
+                <div class="reset-inputs">
+                    <input type="password" class="reset-box" placeholder="Nueva contraseña" required>
+                    <input type="password" class="reset-box" placeholder="Confirmar nueva contraseña" required>
+                </div>
+                <button type="submit" class="reset-submit">Restablecer</button>
+                <p class="reset-info">Asegúrate de que las contraseñas coincidan y cumplan con los requisitos de seguridad.</p>
+            </form>
+        </div>
+        
+    </main>
+    <script>
+        document.getElementById('reset-password-form').addEventListener('submit', function(event) {
+            event.preventDefault();
+            
+            const newPassword = document.getElementById('new-password').value;
+            const confirmPassword = document.getElementById('confirm-password').value;
+            
+            if (newPassword === confirmPassword) {
+                if (validatePassword(newPassword)) {
+                    // Aquí puedes enviar el formulario al servidor
+                    alert('Su contraseña ha sido restablecida con éxito.');
+                } else {
+                    alert('La contraseña no cumple con los requisitos de seguridad.');
+                }
+            } else {
+                alert('Las contraseñas no coinciden.');
+            }
+        });
+    
+        function validatePassword(password) {
+            // Implementar tus reglas de validación de contraseña aquí
+            // Ejemplo: al menos 8 caracteres, una mayúscula, un número y un carácter especial
+            const re = /^(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*])[A-Za-z\d!@#$%^&*]{8,}$/;
+            return re.test(password);
+        }
+    </script>
+    <footer>
+        <div class="left">
+            <a href="../Footer/system-status.html">System Status</a> |
+            <a href="../Footer/Blog.html">Blog</a> |
+            <a href="../Footer/Developer.html">Developer</a> |
+            <a href="../Footer/Contact_us.html">Contact Us</a> |
+            <a href="../Footer/Help.html">Help</a>
+        </div>
+        <div class="right">
+            <div>
+                <a href="https://github.com/tuusuario" target="_blank"><i class="fab fa-github"></i></a>
+                <a href="https://www.facebook.com/tupagina" target="_blank"><i class="fab fa-facebook"></i></a>
+            </div>
+            <p>© 2024 ANALITYC SOFTWARE, LLC, A</p>
+        </div>
+    </footer>
+</body>
+</html>
