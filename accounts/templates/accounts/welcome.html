@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+{% block title %}Welcome{% endblock %}
+{% block content %}
+<h1>Welcome, {{ user.username }}!</h1>
+<h2>Upload File</h2>
+<form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Upload</button>
+</form>
+<h2>Your Files</h2>
+<ul>
+    {% for archivo in archivos %}
+    <li>{{ archivo.nombre_archivo }} - 
+        <a href="{% url 'serve_file' archivo.id %}" target="_blank">View</a> - 
+        <a href="{% url 'generate_chart' archivo.id %}">Generate Chart</a>
+    </li>
+    {% endfor %}
+</ul>
+{% endblock %}
