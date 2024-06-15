@@ -1,20 +1,36 @@
 {% extends 'base.html' %}
-{% block title %}Welcome{% endblock %}
+
+{% block title %}Bienvenido{% endblock %}
+
 {% block content %}
-<h1>Welcome, {{ user.username }}!</h1>
-<h2>Upload File</h2>
-<form method="post" enctype="multipart/form-data">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit">Upload</button>
-</form>
-<h2>Your Files</h2>
-<ul>
-    {% for archivo in archivos %}
-    <li>{{ archivo.nombre_archivo }} - 
-        <a href="{% url 'serve_file' archivo.id %}" target="_blank">View</a> - 
-        <a href="{% url 'generate_chart' archivo.id %}">Generate Chart</a>
-    </li>
-    {% endfor %}
-</ul>
+<div class="container">
+    <h1>Bienvenido, {{ user.username }}!</h1>
+    
+    <section class="upload-section">
+        <h2>Subir Archivo</h2>
+        <form method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit" class="btn btn-primary">Subir</button>
+        </form>
+    </section>
+    
+    <section class="files-section">
+        <h2>Tus Archivos</h2>
+        <ul class="list-group">
+            {% for archivo in archivos %}
+            <li class="list-group-item {% cycle 'list-group-item-primary' 'list-group-item-secondary' %} {% if forloop.last %}mb-4{% endif %}">
+                <div class="d-flex justify-content-between align-items-center">
+                    <span class="archivo-nombre h5">{{ archivo.nombre_archivo }}</span>
+                    <div class="d-flex">
+                        <a href="{% url 'archivo_detail' archivo.id %}" class="btn btn-secondary ml-2">Ver Detalles</a>
+                        <a href="{% url 'generate_chart' archivo.id %}" class="btn btn-info ml-2">Generar Gráfica</a>
+                        <a href="{% url 'delete_archivo' archivo.id %}" class="btn btn-danger ml-2" onclick="return confirm('¿Estás seguro que quieres eliminar este archivo?');">Eliminar</a>
+                    </div>
+                </div>
+            </li>
+            {% endfor %}
+        </ul>
+    </section>
+</div>
 {% endblock %}

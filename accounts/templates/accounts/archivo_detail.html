@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+{% block title %}Detalles Del Archivo{% endblock %}
+{% block content %}
+<div class="container">
+    <h1 class="mt-4">Archivo: {{ archivo.nombre_archivo }}</h1>
+    <p><strong>Archivo de:</strong> {{ archivo.usuario.username }}</p>
+
+    <h2 class="mt-4">Contenido</h2>
+    <div class="table-responsive">
+        <table class="table table-bordered">
+            {% for row in data %}
+            <tr>
+                {% for cell in row %}
+                <td>{{ cell }}</td>
+                {% endfor %}
+            </tr>
+            {% endfor %}
+        </table>
+    </div>
+
+    <a href="{% url 'welcome' %}" class="btn btn-primary mt-4">Volver a Welcome</a>
+    <a href="{% url 'delete_archivo' archivo.id %}" class="btn btn-danger mt-4" onclick="return confirm('¿Estás seguro que quieres eliminar este archivo?');">Eliminar</a>
+
+    {% if grafica %}
+    <h2 class="mt-4">Gráficas Generadas</h2>
+    <button class="btn btn-secondary" onclick="toggleChart()">Mostrar Gráficas</button>
+    <div id="chart-container" class="mt-4" style="display: none;">
+        <img src="{{ grafica.parametros.chart_file_path }}" class="img-fluid" alt="Generated Chart">
+    </div>
+    {% endif %}
+</div>
+
+<script>
+function toggleChart() {
+    var chartContainer = document.getElementById('chart-container');
+    if (chartContainer.style.display === 'none' || chartContainer.style.display === '') {
+        chartContainer.style.display = 'block';
+    } else {
+        chartContainer.style.display = 'none';
+    }
+}
+</script>
+{% endblock %}

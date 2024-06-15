@@ -17,7 +17,7 @@ class Grafica(models.Model):
     archivo = models.ForeignKey(Archivo, on_delete=models.CASCADE)
     tipo_grafica = models.CharField(max_length=100)
     parametros = models.JSONField()
-    imagen_grafica = models.ImageField(upload_to='images/')
+    imagen_grafica = models.ImageField(upload_to='graficas/')
     fecha_creacion = models.DateTimeField(default=timezone.now)
 
     def __str__(self):

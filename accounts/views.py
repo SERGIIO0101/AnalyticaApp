@@ -63,6 +63,7 @@ def serve_file(request, archivo_id):
     file_path = os.path.join(settings.MEDIA_ROOT, archivo.archivo.name)
     return FileResponse(open(file_path, 'rb'))
 
+@login_required
 def generate_chart(request, archivo_id):
     archivo = get_object_or_404(Archivo, id=archivo_id)
     
@@ -81,27 +82,25 @@ def generate_chart(request, archivo_id):
         data.append(row)
     
     # Procesar los datos para la gráfica (aquí necesitarías adaptar esto a tus datos)
-    labels = [row[0] for row in data[1:]]  # Suponiendo que las etiquetas están en la primera columna
+    labels = [str(row[0]) for row in data[1:]]  # Suponiendo que las etiquetas están en la primera columna
     values = [row[1] for row in data[1:]]  # Suponiendo que los valores están en la segunda columna
     
     # Generar la gráfica de barras
+    plt.figure(figsize=(10, 6))
     plt.bar(np.arange(len(labels)), values)
     plt.xticks(np.arange(len(labels)), labels, rotation=45)
     plt.xlabel('Category')
     plt.ylabel('Value')
     plt.title('Bar Chart')
     
-    # Guardar la gráfica en un archivo en el sistema de archivos
-    chart_file_path = f'grafica_{archivo_id}.png'
-    plt.savefig(os.path.join(settings.MEDIA_ROOT, chart_file_path))
+    # Guardar la gráfica en un archivo (puedes ajustar esto según tus necesidades)
+    chart_file_name = f'grafica_{archivo_id}.png'
+    chart_file_path = os.path.join(settings.MEDIA_ROOT, chart_file_name)
+    plt.savefig(chart_file_path)
+    plt.close()
     
     # Crear una instancia de Grafica y guardarla en la base de datos
-    Grafica.objects.create(
-        archivo=archivo, 
-        tipo_grafica='bar', 
-        parametros={},  # Aquí puedes guardar cualquier parámetro adicional que necesites
-        imagen_grafica=chart_file_path
-    )
+    Grafica.objects.create(archivo=archivo, tipo_grafica='bar', parametros={'chart_file_path': os.path.join(settings.MEDIA_URL, chart_file_name)})
     
     # Redirigir a la página de bienvenida
     return redirect('welcome')
@@ -111,3 +110,33 @@ def serve_file(request, archivo_id):
     archivo = Archivo.objects.get(id=archivo_id)
     file_path = os.path.join(settings.MEDIA_ROOT, archivo.archivo.name)
     return FileResponse(open(file_path, 'rb'))
+
+@login_required
+def archivo_detail(request, archivo_id):
+    archivo = get_object_or_404(Archivo, id=archivo_id)
+    
+    # Leer el archivo XLSX y obtener los datos
+    file_path = archivo.archivo.path
+    wb = openpyxl.load_workbook(file_path)
+    sheet = wb.active
+    
+    # Convertir los datos de la hoja de cálculo en una lista
+    data = []
+    for row in sheet.iter_rows(values_only=True):
+        data.append(row)
+    
+    # Obtener la gráfica asociada
+    grafica = Grafica.objects.filter(archivo=archivo).first()
+    
+    context = {
+        'archivo': archivo,
+        'data': data,
+        'grafica': grafica,
+    }
+    return render(request, 'accounts/archivo_detail.html', context)
+
+@login_required
+def delete_archivo(request, archivo_id):
+    archivo = get_object_or_404(Archivo, id=archivo_id)
+    archivo.delete()
+    return redirect('welcome')
