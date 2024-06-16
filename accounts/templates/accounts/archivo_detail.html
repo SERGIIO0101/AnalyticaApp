@@ -1,19 +1,21 @@
 {% extends 'base.html' %}
-{% block title %}Detalles Del Archivo{% endblock %}
+{% block title %}Archivo Details{% endblock %}
 {% block content %}
 <div class="container">
     <h1 class="mt-4">Archivo: {{ archivo.nombre_archivo }}</h1>
-    <p><strong>Archivo de:</strong> {{ archivo.usuario.username }}</p>
+    <p><strong>Uploaded by:</strong> {{ archivo.usuario.username }}</p>
+
+    
 
     <h2 class="mt-4">Contenido</h2>
     <div class="table-responsive">
         <table class="table table-bordered">
             {% for row in data %}
-            <tr>
-                {% for cell in row %}
-                <td>{{ cell }}</td>
-                {% endfor %}
-            </tr>
+                <tr>
+                    {% for cell in row %}
+                        <td>{{ cell }}</td>
+                    {% endfor %}
+                </tr>
             {% endfor %}
         </table>
     </div>
@@ -21,23 +23,90 @@
     <a href="{% url 'welcome' %}" class="btn btn-primary mt-4">Volver a Welcome</a>
     <a href="{% url 'delete_archivo' archivo.id %}" class="btn btn-danger mt-4" onclick="return confirm('¿Estás seguro que quieres eliminar este archivo?');">Eliminar</a>
 
-    {% if grafica %}
-    <h2 class="mt-4">Gráficas Generadas</h2>
-    <button class="btn btn-secondary" onclick="toggleChart()">Mostrar Gráficas</button>
-    <div id="chart-container" class="mt-4" style="display: none;">
-        <img src="{{ grafica.parametros.chart_file_path }}" class="img-fluid" alt="Generated Chart">
+    <!-- Botones para generar gráficas -->
+    <div class="mt-4">
+        <form action="{% url 'generate_chart' archivo.id %}" method="post" style="display: inline;">
+            {% csrf_token %}
+            <input type="hidden" name="chart_type" value="bar">
+            <button type="submit" {% if bar_chart_generated %}disabled{% endif %} class="btn btn-primary">Generar Gráfico de Barras</button>
+        </form>
+
+        <form action="{% url 'generate_chart' archivo.id %}" method="post" style="display: inline;">
+            {% csrf_token %}
+            <input type="hidden" name="chart_type" value="pie">
+            <button type="submit" {% if pie_chart_generated %}disabled{% endif %} class="btn btn-primary">Generar Gráfico de Pastel</button>
+        </form>
+
+        <form action="{% url 'generate_chart' archivo.id %}" method="post" style="display: inline;">
+            {% csrf_token %}
+            <input type="hidden" name="chart_type" value="line">
+            <button type="submit" {% if line_chart_generated %}disabled{% endif %} class="btn btn-primary">Generar Gráfico de Líneas</button>
+        </form>
     </div>
-    {% endif %}
 </div>
 
+    {% if graficas %}
+        {% for grafica in graficas %}
+            {% if grafica.tipo_grafica == 'bar' %}
+                <div class="card mt-4">
+                    <div class="card-header">
+                        <h2 class="mb-0">Gráfico de Barras Generado</h2>
+                    </div>
+                    <div class="card-body">
+                        <button class="btn btn-secondary" onclick="toggleChart('bar-chart-container-{{ grafica.id }}')">Mostrar/Ocultar Gráfico de Barras</button>
+                        <div id="bar-chart-container-{{ grafica.id }}" style="display: none;">
+                            <img src="{{ grafica.parametros.chart_file_path }}" class="img-fluid" alt="Generated Bar Chart">
+                        </div>
+                    </div>
+                </div>
+            {% elif grafica.tipo_grafica == 'pie' %}
+                <div class="card mt-4">
+                    <div class="card-header">
+                        <h2 class="mb-0">Gráfico de Pastel Generado</h2>
+                    </div>
+                    <div class="card-body">
+                        <button class="btn btn-secondary" onclick="toggleChart('pie-chart-container-{{ grafica.id }}')">Mostrar/Ocultar Gráfico de Pastel</button>
+                        <div id="pie-chart-container-{{ grafica.id }}" style="display: none;">
+                            <img src="{{ grafica.parametros.chart_file_path }}" class="img-fluid" alt="Generated Pie Chart">
+                        </div>
+                    </div>
+                </div>
+            {% elif grafica.tipo_grafica == 'line' %}
+                <div class="card mt-4">
+                    <div class="card-header">
+                        <h2 class="mb-0">Gráfico de Líneas Generado</h2>
+                    </div>
+                    <div class="card-body">
+                        <button class="btn btn-secondary" onclick="toggleChart('line-chart-container-{{ grafica.id }}')">Mostrar/Ocultar Gráfico de Líneas</button>
+                        <div id="line-chart-container-{{ grafica.id }}" style="display: none;">
+                            <img src="{{ grafica.parametros.chart_file_path }}" class="img-fluid" alt="Generated Line Chart">
+                        </div>
+                    </div>
+                </div>
+            {% endif %}
+        {% endfor %}
+    {% else %}
+        <div class="alert alert-info mt-4" role="alert">
+            <strong>¡Oops!</strong> Parece que no hay gráficas disponibles en este momento.
+        </div>
+    {% endif %}
+
 <script>
-function toggleChart() {
-    var chartContainer = document.getElementById('chart-container');
-    if (chartContainer.style.display === 'none' || chartContainer.style.display === '') {
-        chartContainer.style.display = 'block';
-    } else {
-        chartContainer.style.display = 'none';
-    }
+function toggleChart(containerId) {
+    var chartContainer = document.getElementById(containerId);
+    var allContainers = document.querySelectorAll('[id^="bar-chart-container"], [id^="pie-chart-container"], [id^="line-chart-container"]');
+    
+    allContainers.forEach(function(container) {
+        if (container.id === containerId) {
+            if (container.style.display === 'none' || container.style.display === '') {
+                container.style.display = 'block';
+            } else {
+                container.style.display = 'none';
+            }
+        } else {
+            container.style.display = 'none';
+        }
+    });
 }
 </script>
 {% endblock %}

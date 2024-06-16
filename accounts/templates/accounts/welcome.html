@@ -23,10 +23,10 @@
                 <div class="d-flex justify-content-between align-items-center">
                     <span class="archivo-nombre h5">{{ archivo.nombre_archivo }}</span>
                     <div class="d-flex">
-                        <a href="{% url 'archivo_detail' archivo.id %}" class="btn btn-secondary ml-2">Ver Detalles</a>
-                        <a href="{% url 'generate_chart' archivo.id %}" class="btn btn-info ml-2">Generar Gráfica</a>
-                        <a href="{% url 'delete_archivo' archivo.id %}" class="btn btn-danger ml-2" onclick="return confirm('¿Estás seguro que quieres eliminar este archivo?');">Eliminar</a>
+                        <a href="{% url 'archivo_detail' archivo.id %}" class="btn btn-secondary" style="margin-left: 10px;">Ver Detalles</a>
+                        <a href="{% url 'delete_archivo' archivo.id %}" class="btn btn-danger" style="margin-left: 10px;" onclick="return confirm('¿Estás seguro que quieres eliminar este archivo?');">Eliminar</a>
                     </div>
+                    
                 </div>
             </li>
             {% endfor %}

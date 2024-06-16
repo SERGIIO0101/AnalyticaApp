@@ -66,6 +66,7 @@ def serve_file(request, archivo_id):
 @login_required
 def generate_chart(request, archivo_id):
     archivo = get_object_or_404(Archivo, id=archivo_id)
+    chart_type = request.POST.get('chart_type')
     
     # Ruta al archivo XLSX en el sistema de archivos
     file_path = archivo.archivo.path
@@ -81,29 +82,51 @@ def generate_chart(request, archivo_id):
     for row in sheet.iter_rows(values_only=True):
         data.append(row)
     
-    # Procesar los datos para la gráfica (aquí necesitarías adaptar esto a tus datos)
+    # Procesar los datos para la gráfica
     labels = [str(row[0]) for row in data[1:]]  # Suponiendo que las etiquetas están en la primera columna
     values = [row[1] for row in data[1:]]  # Suponiendo que los valores están en la segunda columna
     
-    # Generar la gráfica de barras
-    plt.figure(figsize=(10, 6))
-    plt.bar(np.arange(len(labels)), values)
-    plt.xticks(np.arange(len(labels)), labels, rotation=45)
-    plt.xlabel('Category')
-    plt.ylabel('Value')
-    plt.title('Bar Chart')
+    if chart_type == 'bar':
+        # Generar la gráfica de barras
+        plt.figure(figsize=(10, 6))
+        plt.bar(np.arange(len(labels)), values)
+        plt.xticks(np.arange(len(labels)), labels, rotation=45)
+        plt.xlabel('Category')
+        plt.ylabel('Value')
+        plt.title('Bar Chart')
+        chart_file_name = f'grafica_bar_{archivo_id}.png'
+    elif chart_type == 'pie':
+        # Generar la gráfica de pastel
+        plt.figure(figsize=(10, 6))
+        plt.pie(values, labels=labels, autopct='%1.1f%%', startangle=140)
+        plt.title('Pie Chart')
+        chart_file_name = f'grafica_pie_{archivo_id}.png'
+    elif chart_type == 'line':
+        # Generar la gráfica de líneas
+        plt.figure(figsize=(10, 6))
+        plt.plot(labels, values, marker='o')
+        plt.xticks(rotation=45)
+        plt.xlabel('Category')
+        plt.ylabel('Value')
+        plt.title('Line Chart')
+        chart_file_name = f'grafica_line_{archivo_id}.png'
+    else:
+        return redirect('archivo_detail', archivo_id=archivo_id)
     
-    # Guardar la gráfica en un archivo (puedes ajustar esto según tus necesidades)
-    chart_file_name = f'grafica_{archivo_id}.png'
     chart_file_path = os.path.join(settings.MEDIA_ROOT, chart_file_name)
     plt.savefig(chart_file_path)
     plt.close()
     
     # Crear una instancia de Grafica y guardarla en la base de datos
-    Grafica.objects.create(archivo=archivo, tipo_grafica='bar', parametros={'chart_file_path': os.path.join(settings.MEDIA_URL, chart_file_name)})
+    Grafica.objects.create(archivo=archivo, tipo_grafica=chart_type, parametros={'chart_file_path': os.path.join(settings.MEDIA_URL, chart_file_name)})
     
-    # Redirigir a la página de bienvenida
-    return redirect('welcome')
+    # Redirigir a la página de detalles del archivo
+    return redirect('archivo_detail', archivo_id=archivo_id)
+
+@login_required
+def generate_pie_chart(request, archivo_id):
+    archivo = get_object_or_404(Archivo, id=archivo_id)
+    return generate_chart(request, archivo_id)
 
 @login_required
 def serve_file(request, archivo_id):
@@ -114,24 +137,39 @@ def serve_file(request, archivo_id):
 @login_required
 def archivo_detail(request, archivo_id):
     archivo = get_object_or_404(Archivo, id=archivo_id)
-    
+        
     # Leer el archivo XLSX y obtener los datos
     file_path = archivo.archivo.path
     wb = openpyxl.load_workbook(file_path)
     sheet = wb.active
-    
+
     # Convertir los datos de la hoja de cálculo en una lista
     data = []
     for row in sheet.iter_rows(values_only=True):
         data.append(row)
+
+    # Obtener todas las gráficas asociadas
+    graficas = Grafica.objects.filter(archivo=archivo)
     
-    # Obtener la gráfica asociada
-    grafica = Grafica.objects.filter(archivo=archivo).first()
-    
+    # Verificar si ya existe una gráfica de barras, de pastel o de líneas
+    bar_chart_generated = False
+    pie_chart_generated = False
+    line_chart_generated = False
+    for grafica in graficas:
+        if grafica.tipo_grafica == 'bar':
+            bar_chart_generated = True
+        elif grafica.tipo_grafica == 'pie':
+            pie_chart_generated = True
+        elif grafica.tipo_grafica == 'line':
+            line_chart_generated = True
+
     context = {
         'archivo': archivo,
         'data': data,
-        'grafica': grafica,
+        'graficas': graficas,
+        'bar_chart_generated': bar_chart_generated,
+        'pie_chart_generated': pie_chart_generated,
+        'line_chart_generated': line_chart_generated,
     }
     return render(request, 'accounts/archivo_detail.html', context)
 
