@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+{% block title %}Developer{% endblock %}
+{% block content %}
+<main>
+  <!-- Sobre nosotros - Nuestro equipo -->
+  <section class="container">
+    <div class="text-center mb-4">
+      <h1 class="display-5 dev-title">Conozca a nuestros desarrolladores</h1>
+      <p class="lead dev-sub">Los cerebros detrás de la operación</p>
+    </div>
+    <div class="row justify-content-center">
+      <div class="col-lg-3 col-md-4 col-sm-6 mb-3 d-flex justify-content-center">
+        <div class="card h-100 shadow-sm" style="width: 12rem;">
+            <img src="../../static/img/sergio.jpg" class="card-img-top p-2" alt="Developer 1" style="width: 180px; height: 180px; object-fit: cover; margin: 1px auto;">
+          <div class="card-body d-flex flex-column p-2 text-center">
+            <h6 class="card-title">Sergio A. Severiche</h6>
+            <p class="card-text small">Experto en desarrollo front-end con pasión por crear impresionantes interfaces de usuario.</p>
+            <div class="mt-auto">
+              <a href="https://github.com/SERGIIO0101" class="btn btn-outline-primary btn-sm btn-block">Contactar</a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-3 col-md-4 col-sm-6 mb-3 d-flex justify-content-center">
+        <div class="card h-100 shadow-sm" style="width: 12rem;">
+            <img src="../../static/img/junior.jpg" class="card-img-top p-2" alt="Developer 1" style="width: 180px; height: 180px; object-fit: cover; margin: 1px auto;">
+          <div class="card-body d-flex flex-column p-2 text-center">
+            <h6 class="card-title">Jorge D. Sierra</h6>
+            <p class="card-text small">Especialista en desarrollo back-end y gestión de bases de datos, asegurando operaciones fluidas y eficientes.</p>
+            <div class="mt-auto">
+              <a href="https://github.com/juniorsierra18" class="btn btn-outline-primary btn-sm btn-block">Contactar</a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-3 col-md-4 col-sm-6 mb-3 d-flex justify-content-center">
+        <div class="card h-100 shadow-sm" style="width: 12rem;">
+            <img src="../../static/img/joel.jpg" class="card-img-top p-2" alt="Developer 1" style="width: 180px; height: 180px; object-fit: cover; margin: 1px auto;">
+          <div class="card-body d-flex flex-column p-2 text-center">
+            <h6 class="card-title">Joel D. Cortes</h6>
+            <p class="card-text small">Desarrollador full-stack con habilidad para resolver problemas y amor por las soluciones tecnológicas innovadoras.</p>
+            <div class="mt-auto">
+              <a href="https://github.com/DivinaCreacion" class="btn btn-outline-primary btn-sm btn-block">Contactar</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+{% endblock %}

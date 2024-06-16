@@ -10,11 +10,15 @@ import os
 import openpyxl
 import matplotlib.pyplot as plt
 import numpy as np
+from django.contrib.auth.views import LoginView
 
 # Create your views here.
 
 def home(request):
     return render(request, 'accounts/home.html')
+
+def developer(request):
+    return render(request, 'accounts/developer.html')
 
 def login_view(request):
     if request.method == 'POST':

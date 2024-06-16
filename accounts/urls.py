@@ -5,10 +5,11 @@ from django.conf.urls.static import static
 
 urlpatterns = [
     path('', views.home, name='home'),
-    path('login/', views.login_view, name='login'),
+    path('iniciar/', views.login_view, name='iniciar'),
     path('logout/', views.logout_view, name='logout'),
     path('register/', views.register, name='register'),
     path('welcome/', views.welcome, name='welcome'),
+    path('developer/', views.developer, name='developer'),
     path('archivo/<int:archivo_id>/', views.serve_file, name='serve_file'),
     path('generate_chart/<int:archivo_id>/', views.generate_chart, name='generate_chart'),
     path('generate_pie_chart/<int:archivo_id>/', views.generate_pie_chart, name='generate_pie_chart'),
